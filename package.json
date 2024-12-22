@@ -2,7 +2,7 @@
   "name": "algo3-portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://algo3portfolio.github.io/algo3portfolio",
+  "homepage": "https://nketiah1717.github.io/algo3portfolio",
   "dependencies": {
     "chart.js": "^4.4.7",
     "framer-motion": "^11.15.0",
