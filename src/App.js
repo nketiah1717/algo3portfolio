@@ -9,7 +9,7 @@ import './styles/App.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/algo3portfolio">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

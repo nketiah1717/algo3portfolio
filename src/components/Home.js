@@ -35,31 +35,43 @@ const Home = () => {
     sections.forEach((section) => observer.observe(section));
 
     const fetchMetrics = async () => {
-      const response = await fetch('/assets/files/results.csv');
-      const reader = response.body.getReader();
-      const result = await reader.read();
-      const decoder = new TextDecoder('utf-8');
-      const csv = decoder.decode(result.value);
+      try {
+        const response = await fetch(`${process.env.PUBLIC_URL}/assets/files/results.csv`);
+        const reader = response.body.getReader();
+        const result = await reader.read();
+        const decoder = new TextDecoder('utf-8');
+        const csv = decoder.decode(result.value);
 
-      Papa.parse(csv, {
-        header: true,
-        skipEmptyLines: true,
-        complete: (parsedData) => {
-          const returns = parsedData.data.map((row) => parseFloat(row['Daily return'].replace('%', '')) / 100);
-          const equity = returns.reduce((acc, curr) => {
-            acc.push((acc[acc.length - 1] || 0) + curr);
-            return acc;
-          }, []);
-          const daily = returns;
-          const weekly = aggregatePnL(returns, 5); // 5 trading days in a week
-          const monthly = aggregatePnL(returns, 20); // 20 trading days in a month
-          const datesFromCSV = parsedData.data.map((row) => row['Date']);
+        Papa.parse(csv, {
+          header: true,
+          skipEmptyLines: true,
+          complete: (parsedData) => {
+            const returns = parsedData.data.map((row) => {
+              if (row['Daily return'] && row['Daily return'].trim()) {
+                return parseFloat(row['Daily return'].replace('%', '')) / 100;
+              }
+              return 0;
+            });
 
-          setData({ equity, daily, weekly, monthly });
-          setMetrics(calculateMetrics(returns));
-          setDates(datesFromCSV);
-        },
-      });
+            const datesFromCSV = parsedData.data.map((row) => row['Date'] || 'Unknown Date');
+            const cumulativeReturns = returns.reduce((acc, curr) => {
+              acc.push((acc[acc.length - 1] || 0) + curr);
+              return acc;
+            }, []);
+
+            setData({
+              equity: cumulativeReturns,
+              daily: returns,
+              weekly: aggregatePnL(returns, 5),
+              monthly: aggregatePnL(returns, 20),
+            });
+            setMetrics(calculateMetrics(returns));
+            setDates(datesFromCSV);
+          },
+        });
+      } catch (error) {
+        console.error('Error fetching or processing metrics:', error);
+      }
     };
 
     fetchMetrics();
