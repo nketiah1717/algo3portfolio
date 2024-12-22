@@ -1,0 +1,741 @@
+/* Header Section */
+.home-header {
+  text-align: center;
+  background-image: url('../assets/images/aboutus.png'); /* Path to the image */
+  background-size: cover; /* Ensure the image covers the entire area */
+  background-position: center; /* Center the image */
+  padding: 3rem 2rem;
+  color: #fff; /* White text color for contrast */
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.home-header h1 {
+  font-size: 3rem;
+  color: #cc5500; /* Orange color */
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.home-header p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.navigation {
+  margin-top: 1rem;
+}
+
+.navigation ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.navigation ul li {
+  display: inline;
+}
+
+.navigation ul li a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.navigation ul li a:hover {
+  background-color: #336699; /* Orange background on hover */
+  color: #fff; /* Ensure text remains white */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+
+/* About Us Section */
+.about-section {
+  padding: 4rem 2rem;
+  background-color: #f9f9f9;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.about-section h2 {
+  font-size: 2.5rem;
+  color: #cc5500; /* Orange heading color */
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.about-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.about-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Fixed card width for consistency */
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.about-card h3 {
+  font-size: 1.5rem;
+  color: #336699; /* Blue subheading color */
+  margin-bottom: 1rem;
+}
+
+.about-card p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.about-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about-card ul li {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+
+/* Project Timeline Section */
+.timeline {
+  margin-top: 4rem;
+  padding: 2rem;
+  background: #f9f9f9; /* Светлый фон */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-container {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 3px solid #cc5500; /* Вертикальная линия */
+}
+
+.timeline-item {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Круговые индикаторы на временной оси */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem; /* Смещаем точку левее */
+  top: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  background: #cc5500; /* Темно-оранжевый цвет */
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* Дата */
+.timeline-date {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+  margin-left: 1.5rem; /* Отступ вправо от точки */
+  display: inline-block;
+}
+
+.timeline-content {
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content h3 {
+  font-size: 1.5rem;
+  color: #cc5500; /* Темно-оранжевый заголовок */
+  margin-bottom: 0.5rem;
+}
+
+.timeline-content p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Для всех анимационных секций */
+.animate-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Timeline items */
+.timeline-item {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Technology Section */
+.technology {
+  margin-top: 4rem;
+}
+
+.technology-banner {
+  background-image: url('../assets/images/technology.png'); /* Путь к изображению */
+  background-size: cover;
+  background-position: center;
+  width: 100%; /* Во всю ширину */
+  padding: 4rem 2rem; /* Отступы */
+  color: #fff; /* Белый текст */
+  text-align: center;
+  border-radius: 0; /* Убираем скругление для полного охвата */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.technology-banner h2 {
+  font-size: 2.5rem;
+  color: #cc5500; /* Цвет как у Project Timeline */
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.technology-banner p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 1200px; /* Ограничиваем ширину текста */
+}
+
+/* Technology Details */
+.technology-details {
+  text-align: left;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem; /* Отступ от баннера */
+}
+
+.technology-details h3 {
+  font-size: 1.8rem;
+  color: #cc5500;
+  margin-bottom: 1rem;
+}
+
+.technology-details ul {
+  list-style: none;
+  padding: 0;
+}
+
+.technology-details ul li {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+.technology-details ul li strong {
+  color: #336699;
+}
+
+/* Мигание для ячейки */
+.timeline-item.now-highlight {
+  animation: blink 1.5s infinite; /* Анимация бесконечного мигания */
+  border: 2px solid #cc5500; /* Оранжевая рамка для выделения */
+  box-shadow: 0 0 10px #cc5500; /* Добавление эффекта свечения */
+}
+
+/* Ключевые кадры для мигания */
+@keyframes blink {
+  0%, 100% {
+    background-color: rgba(255, 204, 0, 0.2); /* Светлый желтый цвет */
+  }
+  50% {
+    background-color: rgba(255, 204, 0, 0.6); /* Более насыщенный желтый цвет */
+  }
+}
+/* Portfolio Composition Grid */
+.portfolio-composition-grid {
+  margin-top: 3rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Remove the composition-central CSS block */
+.composition-central {
+  /* No styles needed as it's removed */
+}
+
+.composition-central h3 {
+  font-size: 2.5rem; /* Slightly larger for emphasis */
+  margin: 0;
+  text-transform: uppercase; /* Make it bold and capitalized */
+}
+
+
+.composition-central h3 {
+  font-size: 2rem;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+
+
+
+
+
+.composition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+  gap: 1rem;
+}
+
+.grid-item {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.grid-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.grid-item h4 {
+  font-size: 1.2rem;
+  color: #336699;
+  margin-bottom: 0.5rem;
+}
+
+.grid-item p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;
+  line-height: 1.5;
+}
+
+
+/* Trading Results Section */
+.trading-results {
+  margin-top: 4rem;
+  padding: 2rem;
+  background: #f9f9f9; /* Светлый фон */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.trading-results h2 {
+  font-size: 2.5rem;
+  color: #cc5500; /* Темно-оранжевый цвет */
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.trading-results .metrics {
+  margin-top: 1rem;
+}
+
+.trading-results .metrics ul {
+  list-style: none; /* Убираем маркеры */
+  padding: 0;
+}
+
+.trading-results .metrics ul li {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #555; /* Темный серый текст */
+  margin-bottom: 0.8rem;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.trading-results .metrics ul li strong {
+  color: #cc5500; /* Темно-оранжевый цвет для выделения */
+}
+
+
+/* Goals Section */
+.goals {
+  margin-top: 4rem;
+}
+
+/* Goals Section */
+.goals-banner {
+  background-image: url('../assets/images/goals.png'); /* Replace with correct path */
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  padding: 4rem 2rem;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.goals-banner h2 {
+  font-size: 2.5rem;
+  color: #cc5500;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.goals-banner p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+/* Value Proposition Section */
+.value-proposition {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.value-proposition h3 {
+  font-size: 2rem;
+  color: #cc5500; /* Orange heading */
+  margin-bottom: 1.5rem;
+}
+
+.value-proposition-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.value-block {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  width: 250px; /* Consistent block size */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.value-block i {
+  font-size: 2rem;
+  color: #336699; /* Blue for icons */
+  margin-bottom: 1rem;
+}
+
+.value-block h4 {
+  font-size: 1.25rem;
+  color: #336699; /* Orange for subheadings */
+  margin-bottom: 0.5rem;
+}
+
+.value-block p {
+  font-size: 1rem;
+  color: #333333;
+  line-height: 1.5;
+}
+
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: #ccc;
+  margin: 0 1rem;
+}
+
+.section-divider span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #cc5500; /* Matches the section header color */
+  text-transform: uppercase;
+}
+
+
+/* Partnership Section Styles */
+.partnership-details {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap; /* Stack vertically on smaller screens */
+}
+
+.hover-card {
+  flex: 1;
+  max-width: 500px;
+  background-color: #ffffff;
+  border: 2px solid #f1f1f1; /* Initial light border */
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  text-align: center;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  border-color: #cc5500; /* Highlighted border color on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Add shadow for emphasis */
+}
+
+
+.card-header {
+  margin-bottom: 1rem;
+}
+
+.card-header i.card-icon {
+  font-size: 2.5rem;
+  color: #cc5500;
+  margin-bottom: 0.5rem;
+}
+
+.card-header h4 {
+  font-size: 1.5rem;
+  color: #336699;
+  font-weight: bold;
+}
+
+.hover-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.hover-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.hover-card ul li {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 0.8rem;
+}
+
+/* Button Styles */
+.cta-button {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #cc5500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #e56700;
+  transform: translateY(-2px);
+}
+/* Contact Section */
+.contact-section {
+  padding: 4rem 2rem;
+  background-color: #f9f9f9; /* Light gray background */
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 4rem;
+}
+
+.contact-container h2 {
+  font-size: 2.5rem;
+  color: #cc5500; /* Orange heading */
+  margin-bottom: 1rem;
+}
+
+.contact-container p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #cc5500;
+  box-shadow: 0 0 4px rgba(204, 85, 0, 0.5);
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: #cc5500; /* Orange button */
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #e56700; /* Darker orange */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.contact-email {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+.contact-email a {
+  color: #336699; /* Blue email link */
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-email a:hover {
+  color: #cc5500; /* Orange on hover */
+}
+
+
+/* Footer Section */
+.footer {
+  background-color: #333; /* Dark background */
+  padding: 2rem;
+  text-align: center;
+  margin-top: 2rem;
+  border-top: 1px solid #555; /* Subtle top border for separation */
+}
+
+.footer .navigation {
+  margin-bottom: 1.5rem;
+}
+
+.footer .navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem; /* Space between navigation items */
+}
+
+.footer .navigation ul li a {
+  color: #ffffff; /* White color for links */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.footer .navigation ul li a:hover {
+  color: #cc5500; /* Gold color on hover */
+}
+
+.footer .disclaimer {
+  font-size: 0.9rem;
+  color: #cccccc; /* Light gray text for readability */
+  line-height: 1.5;
+  margin-top: 1rem;
+}
+
+.footer .disclaimer strong {
+  color: #ffffff; /* White for emphasis */
+}
+
+
+
+
+
+
