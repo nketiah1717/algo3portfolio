@@ -13,6 +13,9 @@ const Home = () => {
   const [data, setData] = useState({ equity: [], daily: [], weekly: [], monthly: [] });
   const [metrics, setMetrics] = useState({});
   const [dates, setDates] = useState([]);
+  const chartHeight = `calc(200vh - 500px)`;
+
+
 
   useEffect(() => {
     const observerOptions = {
@@ -78,6 +81,8 @@ const Home = () => {
   }, []);
 
   const getChart = () => {
+    const chartHeight = window.innerWidth < 768 ? 300 : 600;
+
     const chartData = {
       labels: dates.slice(0, data[mode.toLowerCase()].length), // Adjust labels to match data length
       datasets: [
@@ -97,42 +102,33 @@ const Home = () => {
     };
 
     const options = {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        x: {
-          title: {
-            display: true,
-          },
-          ticks: {
-            callback: function (value, index) {
-              return index % 10 === 0 ? this.getLabelForValue(value) : '';
-            },
-          },
-          grid: {
-            display: false,
-          },
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        ticks: {
+          maxTicksLimit: window.innerWidth < 768 ? 3 : 10, // Меньше меток на мобильных устройствах
         },
-        y: {
-          title: {
-            display: true,
-            text: 'Cumulative Returns (%)',
-          },
-          ticks: {
-            callback: (value) => `${(value * 100).toFixed(2)}%`, // Convert to percentage and round to 2 decimal places
-          },
-          grid: {
-            display: false,
-          },
-        },
-      },
-      plugins: {
-        legend: {
+        grid: {
           display: false,
         },
       },
-    };
-
+      y: {
+        ticks: {
+          callback: (value) => `${(value * 100).toFixed(2)}%`, // Процентное отображение
+          maxTicksLimit: 5, // Ограничение количества меток
+        },
+        grid: {
+          display: false,
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
     return mode === 'Daily' || mode === 'Weekly' || mode === 'Monthly' ? (
       <Bar data={chartData} options={options} />
     ) : (
@@ -282,17 +278,20 @@ const Home = () => {
       </ul>
     </div>
     <div className="equity-curve">
-      <div
-        style={{
-          position: 'relative',
-          height: '600px', // Reduced height for compactness
-          width: '80%', // Maintain responsiveness
-          margin: '20px auto',
-        }}
-      >
-        {getChart()}
-      </div>
-    </div>
+  <div
+  style={{
+    position: 'relative',
+    height: 'calc(100vh - 150px)', // Высота графика = высота окна - фиксированный отступ
+    width: '100%',
+    margin: '20px auto',
+  }}
+>
+  {getChart()}
+</div>
+
+
+</div>
+
   </div>
   <div className="buttons" style={{ textAlign: 'center', marginTop: '10px' }}>
     {['Equity', 'Daily', 'Weekly', 'Monthly'].map((m) => (
