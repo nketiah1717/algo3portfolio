@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/algo3portfolio/static/css/main.3933c524.css",
-    "main.js": "/algo3portfolio/static/js/main.b94d54f9.js",
+    "main.js": "/algo3portfolio/static/js/main.a00b2ade.js",
     "static/js/488.0a3ddffe.chunk.js": "/algo3portfolio/static/js/488.0a3ddffe.chunk.js",
     "static/media/aboutus.png": "/algo3portfolio/static/media/aboutus.68827b6d7a503169f3dd.png",
     "static/media/goals.png": "/algo3portfolio/static/media/goals.0baf5cc520f41412712e.png",
     "static/media/technology.png": "/algo3portfolio/static/media/technology.03fcd84858be9fe0284f.png",
     "index.html": "/algo3portfolio/index.html",
     "main.3933c524.css.map": "/algo3portfolio/static/css/main.3933c524.css.map",
-    "main.b94d54f9.js.map": "/algo3portfolio/static/js/main.b94d54f9.js.map",
+    "main.a00b2ade.js.map": "/algo3portfolio/static/js/main.a00b2ade.js.map",
     "488.0a3ddffe.chunk.js.map": "/algo3portfolio/static/js/488.0a3ddffe.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3933c524.css",
-    "static/js/main.b94d54f9.js"
+    "static/js/main.a00b2ade.js"
   ]
 }
