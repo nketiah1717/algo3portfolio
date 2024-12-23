@@ -256,7 +256,7 @@ const Home = () => {
 
 
      {/* Trading Results Section */}
-<section id="trading-results" className="trading-results animate-section">
+<section id="trading results" className="trading-results animate-section">
   <h2>Trading Results</h2>
   <div className="trading-results-container">
     <div className="metrics" style={{ textAlign: 'center', margin: '0 auto', maxWidth: '400px' }}>
