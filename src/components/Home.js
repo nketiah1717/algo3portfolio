@@ -193,6 +193,42 @@ const Home = () => {
     </div>
   </div>
 </section>
+{/* Project Timeline Section */}
+<section className="timeline">
+  <h2>Project Timeline</h2>
+  <div className="timeline-container">
+    {/* Timeline items */}
+    <div className="timeline-item animate-section">
+      <div className="timeline-date">March 2023</div>
+      <div className="timeline-content">
+        <h3>Project Launch</h3>
+        <p>The project officially began with a vision to create a cost-effective and scalable quantitative portfolio.</p>
+      </div>
+    </div>
+    <div className="timeline-item animate-section">
+      <div className="timeline-date">July 2023</div>
+      <div className="timeline-content">
+        <h3>Market Entry</h3>
+        <p>Successfully entered the market with an initial capital of $150,000.</p>
+      </div>
+    </div>
+    <div className="timeline-item animate-section">
+      <div className="timeline-date">August 2024</div>
+      <div className="timeline-content">
+        <h3>New Capital Partner</h3>
+        <p>Achieved a major milestone by onboarding a strategic capital partner, securing CME membership, and reducing operational costs by threefold.</p>
+      </div>
+    </div>
+    <div className="timeline-item animate-section now-highlight">
+      <div className="timeline-date">Now</div>
+      <div className="timeline-content">
+        <h3>Expansion</h3>
+        <p>Seeking additional capital to expand the portfolio and explore new markets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
       {/* Technology Section */}
