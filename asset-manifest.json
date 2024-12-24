@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/algo3portfolio/static/css/main.3933c524.css",
-    "main.js": "/algo3portfolio/static/js/main.a00b2ade.js",
+    "main.css": "/algo3portfolio/static/css/main.2c12186f.css",
+    "main.js": "/algo3portfolio/static/js/main.8accb143.js",
     "static/js/488.0a3ddffe.chunk.js": "/algo3portfolio/static/js/488.0a3ddffe.chunk.js",
     "static/media/aboutus.png": "/algo3portfolio/static/media/aboutus.68827b6d7a503169f3dd.png",
     "static/media/goals.png": "/algo3portfolio/static/media/goals.0baf5cc520f41412712e.png",
-    "static/media/technology.png": "/algo3portfolio/static/media/technology.03fcd84858be9fe0284f.png",
+    "static/media/technology.png": "/algo3portfolio/static/media/technology.0baf5cc520f41412712e.png",
     "index.html": "/algo3portfolio/index.html",
-    "main.3933c524.css.map": "/algo3portfolio/static/css/main.3933c524.css.map",
-    "main.a00b2ade.js.map": "/algo3portfolio/static/js/main.a00b2ade.js.map",
+    "main.2c12186f.css.map": "/algo3portfolio/static/css/main.2c12186f.css.map",
+    "main.8accb143.js.map": "/algo3portfolio/static/js/main.8accb143.js.map",
     "488.0a3ddffe.chunk.js.map": "/algo3portfolio/static/js/488.0a3ddffe.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3933c524.css",
-    "static/js/main.a00b2ade.js"
+    "static/css/main.2c12186f.css",
+    "static/js/main.8accb143.js"
   ]
 }
