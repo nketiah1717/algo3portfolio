@@ -13,9 +13,29 @@ const Home = () => {
   const [data, setData] = useState({ equity: [], daily: [], weekly: [], monthly: [] });
   const [metrics, setMetrics] = useState({});
   const [dates, setDates] = useState([]);
+  const [showScroll, setShowScroll] = useState(false); // State for scroll-to-top button
+
   const chartHeight = `calc(200vh - 500px)`;
 
+  const handleScroll = () => {
+    if (window.scrollY > 300) {
+      setShowScroll(true);
+    } else {
+      setShowScroll(false);
+    }
+  };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const observerOptions = {
@@ -138,20 +158,28 @@ const Home = () => {
 
   return (
     <div className="home">
-      {/* Header Section */}
-<header className="home-header">
-  <h1>Welcome to Algo3 Portfolio</h1>
-  <p>Your trusted partner in algorithmic trading.</p>
-  <nav className="navigation">
-    <ul>
-      <li><a href="#about">About Us</a></li>
-      <li><a href="#technology">Technology</a></li>
-      <li><a href="#trading results">Trading Results</a></li>
-      <li><a href="#goals and opportunity">Goals and Opportunity</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+      <header className="home-header">
+  <div className="header-content">
+    {/* Основной текст */}
+    <h1 className="header-title">Algo3 Portfolio</h1>
+    <p className="header-subtitle">Your trusted partner in algorithmic trading.</p>
+
+    {/* Навигация */}
+    <nav className="header-nav">
+      <ul className="nav-list">
+        <li><a href="#about">About Us</a></li>
+<li><a href="#project timeline">Project Timeline</a></li>
+<li><a href="#technology">Technology</a></li>
+<li><a href="#trading-results">Trading Results</a></li>
+<li><a href="#goals-and-opportunity">Goals and Opportunity</a></li>
+<li><a href="#contact">Contact</a></li>
+
+      </ul>
+    </nav>
+  </div>
 </header>
+
+
 
 
      {/* About Us Section */}
@@ -194,7 +222,7 @@ const Home = () => {
   </div>
 </section>
 {/* Project Timeline Section */}
-<section className="timeline">
+<section id="project timeline" section className="timeline">
   <h2>Project Timeline</h2>
   <div className="timeline-container">
     {/* Timeline items */}
@@ -220,12 +248,13 @@ const Home = () => {
       </div>
     </div>
     <div className="timeline-item animate-section now-highlight">
-      <div className="timeline-date">Now</div>
-      <div className="timeline-content">
-        <h3>Expansion</h3>
-        <p>Seeking additional capital to expand the portfolio and explore new markets.</p>
-      </div>
-    </div>
+  <div className="timeline-date">Now</div>
+  <div className="timeline-content">
+    <h3>Expansion</h3>
+    <p>Seeking additional capital to expand the portfolio and explore new markets.</p>
+  </div>
+</div>
+
   </div>
 </section>
 
@@ -233,7 +262,7 @@ const Home = () => {
 
       {/* Technology Section */}
 <section id="technology" className="technology animate-section">
-  <div className="technology-banner">
+  <div className="banner-style">
     <h2>Technology</h2>
     <p>
       Our technology platform supports a portfolio of 60 fully systematic quantitative strategies implemented in-house using a C# environment. This includes a robust backtesting engine, execution module, data feeds, and a user-friendly GUI application.
@@ -279,8 +308,6 @@ const Home = () => {
   </div>
 </section>
 
-{/* Section Divider */}
-<div className="section-divider"></div>
 
 
 
@@ -288,7 +315,7 @@ const Home = () => {
 
 
      {/* Trading Results Section */}
-<section id="trading results" className="trading-results animate-section">
+<section id="trading-results" className="trading-results animate-section">
   <h2>Trading Results</h2>
   <div className="trading-results-container">
     <div className="metrics" style={{ textAlign: 'center', margin: '0 auto', maxWidth: '400px' }}>
@@ -354,8 +381,8 @@ const Home = () => {
 
 
       {/* Goals and Opportunity Section */}
-<section id="goals and opportunity" section className="goals animate-section">
-  <div className="goals-banner">
+<section id="goals-and-opportunity" section className="goals animate-section">
+  <div className="banner-style">
     <h2>Goals and Opportunity</h2>
     <p>
       We seek a capital investor aligned with our growth vision and risk management approach, aiming for a long-term partnership in algorithmic trading.
@@ -430,9 +457,6 @@ const Home = () => {
   </div>
 </div>
 
-{/* Section Divider */}
-<div className="section-divider"></div>
-
 </section>
 {/* Contact and Feedback Section */}
 <section id="contact" className="contact-section">
@@ -464,25 +488,49 @@ const Home = () => {
 
 
 {/* Footer Section */}
-<footer className="footer">
-  <nav className="navigation">
-    <ul>
-      <li><a href="#about">About Us</a></li>
-      <li><a href="#technology">Technology</a></li>
-      <li><a href="#trading-results">Trading Results</a></li>
-      <li><a href="#goals-and-opportunity">Goals and Opportunity</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-  <div className="disclaimer">
-    <p>
-      <strong>Risk Disclosure:</strong> Past performance is not necessarily indicative of future results. Trading commodity futures, options, and forex involves substantial risk of loss and may not be suitable for all investors. Leverage can magnify losses as well as gains. Consider your financial condition and seek professional advice before investing.
-    </p>
-    <p>
-      Prospective investors should carefully examine all information, including performance data, and rely on their own judgment in making investment decisions. There are no guarantees of profit, and all investments carry risks.
-    </p>
+<footer className="site-footer">
+  <div className="footer-container">
+    {/* Ссылки */}
+    <div className="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+                <li><a href="#about">About Us</a></li>
+<li><a href="#project timeline">Project Timeline</a></li>
+<li><a href="#technology">Technology</a></li>
+<li><a href="#trading-results">Trading Results</a></li>
+<li><a href="#goals-and-opportunity">Goals and Opportunity</a></li>
+<li><a href="#contact">Contact</a></li>
+
+      </ul>
+    </div>
+
+    {/* Контакты */}
+    <div className="footer-contact">
+      <h3>Contact Us</h3>
+      <p>Email: support@algo3portfolio.com</p>
+      <p>Phone: +1-312-543-7471</p>
+      <p>Location: 817 Hibbard Road Unit E Wilmette, IL 60091 USA</p>
+    </div>
+
+    {/* Дисклеймер */}
+    <div className="footer-disclaimer">
+      <p>
+        Disclaimer: Past performance is not necessarily indicative of future results. Trading commodity futures, options, and forex involves substantial risk of loss and may not be suitable for all investors. Leverage can magnify losses as well as gains. Consider your financial condition and seek professional advice before investing.
+      </p>
+    </div>
+  </div>
+
+  {/* Авторское право */}
+  <div className="footer-copyright">
+    <p>&copy; 2024 Algo3 Portfolio. All Rights Reserved.</p>
   </div>
 </footer>
+{/* Кнопка "Наверх" */}
+      {showScroll && (
+        <button className="scroll-to-top" onClick={scrollToTop}>
+          ↑
+        </button>
+      )}
 
 
 

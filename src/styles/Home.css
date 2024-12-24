@@ -1,47 +1,121 @@
 /* Header Section */
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  background-color: #336699;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-to-top:hover {
+  background-color: #cc5500;
+}
+
+.scroll-to-top:active {
+  transform: scale(0.9);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Убирает горизонтальную прокрутку */
+}
+
+/* Общий стиль для баннеров */
+.banner-style {
+  text-align: center;
+  background-image: linear-gradient(120deg, #336699, #cc5500); /* Градиент */
+  padding: 4rem 2rem;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+  background-size: 200% 200%; /* Для анимации фона */
+  animation: gradientMove 5s ease infinite;
+}
+
+/* Заголовок баннеров */
+.banner-style h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Тень текста */
+}
+
+/* Подзаголовок баннеров */
+.banner-style p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+
+/* Хедер */
 .home-header {
   text-align: center;
-  background-image: url('../assets/images/aboutus.png'); /* Path to the image */
-  background-size: cover; /* Ensure the image covers the entire area */
-  background-position: center; /* Center the image */
-  padding: 3rem 2rem;
-  color: #fff; /* White text color for contrast */
+  background-image: linear-gradient(120deg, #336699, #cc5500); /* Градиент */
+  padding: 4rem 2rem;
+  color: #fff;
   border-radius: 8px;
-  margin-bottom: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 
-.home-header h1 {
-  font-size: 3rem;
-  color: #cc5500; /* Orange color */
+/* Основной заголовок */
+.header-title {
+  font-size: 3.5rem; /* Крупный текст */
+  font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 1rem;
-  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Тень текста */
+  animation: fadeInDown 1s ease;
 }
 
-.home-header p {
-  font-size: 1.2rem;
+/* Подзаголовок */
+.header-subtitle {
+  font-size: 1.4rem;
   margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  animation: fadeInUp 1.2s ease;
 }
 
-.navigation {
-  margin-top: 1rem;
+/* Навигация */
+.header-nav {
+  margin-top: 2rem;
 }
 
-.navigation ul {
+.nav-list {
   list-style: none;
-  padding: 0;
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
+  padding: 0;
 }
 
-.navigation ul li {
-  display: inline;
+.nav-list li {
+  display: inline-block;
 }
 
-.navigation ul li a {
+.nav-list li a {
   text-decoration: none;
   font-size: 1.1rem;
   color: #fff;
@@ -50,11 +124,53 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.navigation ul li a:hover {
-  background-color: #336699; /* Orange background on hover */
-  color: #fff; /* Ensure text remains white */
-  transform: translateY(-2px); /* Lift effect on hover */
+.nav-list li a:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный фон */
+  transform: scale(1.1); /* Лёгкое увеличение */
 }
+
+/* Анимации */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.home-header {
+  background-size: 200% 200%;
+  animation: gradientMove 5s ease infinite; /* Плавное движение градиента */
+}
+
+
+
+
 
 
 /* About Us Section */
@@ -64,6 +180,10 @@
   text-align: center;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box; /* Убедитесь, что padding не влияет на ширину */
+  overflow-x: hidden; /* Если дочерние элементы создают скроллинг */
+
 }
 
 .about-section h2 {
@@ -128,6 +248,10 @@
   background: #f9f9f9; /* Light background */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box; /* Убедитесь, что padding не влияет на ширину */
+  overflow-x: hidden; /* Если дочерние элементы создают скроллинг */
+
 }
 
 .timeline h2 {
@@ -198,23 +322,27 @@
 .timeline-content p {
   font-size: 1rem;
   color: #555;
+  color: #555;
   margin: 0;
 }
 
 .timeline-item.now-highlight {
-  border: 2px solid #336699; /* Blue border */
-  box-shadow: 0 0 10px #336699; /* Blue glow effect */
-  animation: blink 1.5s infinite;
+  animation: blink-blue 1.5s infinite;
+  border: 2px solid #336699; /* Синяя рамка */
+  box-shadow: 0 0 10px #336699; /* Синее свечение */
 }
 
-@keyframes blink {
+/* Анимация для синего мигания */
+@keyframes blink-blue {
   0%, 100% {
-    background-color: rgba(51, 102, 153, 0.2); /* Light blue */
+    background-color: rgba(212, 323, 153, 0.2); /* Светло-синий */
   }
   50% {
-    background-color: rgba(51, 102, 153, 0.6); /* Darker blue */
+    background-color: rgba(255, 102, 153, 0.6); /* Насыщенно-синий */
   }
 }
+
+
 
 /* Technology Section */
 .technology {
@@ -231,6 +359,10 @@
   text-align: center;
   border-radius: 0; /* Убираем скругление для полного охвата */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  box-sizing: border-box; /* Убедитесь, что padding не влияет на ширину */
+  overflow-x: hidden; /* Если дочерние элементы создают скроллинг */
+
 }
 
 .technology-banner h2 {
@@ -365,6 +497,10 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  width: 100%;
+  box-sizing: border-box; /* Убедитесь, что padding не влияет на ширину */
+  overflow-x: hidden; /* Если дочерние элементы создают скроллинг */
+
 }
 
 .trading-results h2 {
@@ -405,7 +541,7 @@
 
 /* Goals Section */
 .goals-banner {
-  background-image: url('../assets/images/goals.png'); /* Replace with correct path */
+  background-image: url('../assets/images/goals.png');
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -414,6 +550,10 @@
   text-align: center;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+
 }
 
 .goals-banner h2 {
@@ -438,6 +578,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
+
 }
 
 .value-proposition h3 {
@@ -683,81 +824,138 @@
 }
 
 
-/* Footer Section */
-.footer {
-  background-color: #333; /* Dark background */
-  padding: 2rem;
-  text-align: center;
-  margin-top: 2rem;
-  border-top: 1px solid #555; /* Subtle top border for separation */
+/* Основной контейнер футера */
+.site-footer {
+  background-color: #222; /* Тёмный фон */
+  color: #fff; /* Белый текст */
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  border-top: 4px solid #cc5500; /* Линия сверху для выделения */
 }
 
-.footer .navigation {
-  margin-bottom: 1.5rem;
+.footer-container {
+  display: flex;
+  flex-wrap: wrap; /* Гибкая структура для адаптивности */
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.footer .navigation ul {
+/* Ссылки */
+.footer-links {
+  flex: 1 1 200px;
+}
+
+.footer-links h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #ffcc00; /* Выделение заголовка */
+}
+
+.footer-links ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  gap: 2rem; /* Space between navigation items */
 }
 
-.footer .navigation ul li a {
-  color: #ffffff; /* White color for links */
+.footer-links ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links ul li a {
   text-decoration: none;
-  font-weight: bold;
+  color: #fff;
   transition: color 0.3s ease;
 }
 
-.footer .navigation ul li a:hover {
-  color: #cc5500; /* Gold color on hover */
+.footer-links ul li a:hover {
+  color: #ffcc00; /* Цвет при наведении */
 }
 
-.footer .disclaimer {
-  font-size: 0.9rem;
-  color: #cccccc; /* Light gray text for readability */
+/* Контакты */
+.footer-contact {
+  flex: 1 1 200px;
+}
+
+.footer-contact h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #ffcc00;
+}
+
+.footer-contact p {
+  margin: 0.3rem 0;
+}
+
+/* Дисклеймер */
+.footer-disclaimer {
+  flex: 2 1 400px;
+  font-size: 0.8rem;
   line-height: 1.5;
+  color: #ccc;
   margin-top: 1rem;
 }
 
-.footer .disclaimer strong {
-  color: #ffffff; /* White for emphasis */
+/* Авторское право */
+.footer-copyright {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-top: 2rem;
 }
+
+
+
 /* General adjustments for mobile screens */
 @media (max-width: 768px) {
+html, body {
+    font-size: 14px; /* Уменьшить базовый размер шрифта */
+    line-height: 1.5; /* Оптимизировать межстрочное расстояние */
+    overflow-x: hidden; /* Скрыть горизонтальную прокрутку */
+  }
+  body {
+    padding: 1 1rem; /* Внутренние отступы по бокам */
+  }
   .home-header {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .header-title {
+    font-size: 1.8rem; /* Ещё меньше текста на маленьких экранах */
+  }
+
+  .header-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .header-nav .nav-list {
+    flex-direction: column; /* Переключаем на колонку */
+    gap: 0.5rem; /* Уменьшаем расстояние между ссылками */
+    padding: 0;
+  }
+
+  .header-nav .nav-list li {
+    width: 100%; /* Каждая ссылка занимает всю ширину */
     text-align: center;
-    font-size: 1.2rem;
   }
 
-  .home-header h1 {
-    font-size: 2rem;
+  .header-nav .nav-list li a {
+    font-size: 0.9rem; /* Уменьшаем текст ссылок */
+    padding: 0.5rem 1rem; /* Уменьшаем отступы */
   }
 
-  .home-header p {
-    font-size: 1rem;
-  }
-
-  .navigation ul {
-    flex-direction: column;
+  .about-cards,
+  .value-proposition-blocks {
+    grid-template-columns: 1fr; /* Один элемент на строку */
     gap: 1rem;
   }
 
-  .navigation ul li a {
-    font-size: 1rem;
-    padding: 0.5rem;
-  }
-
-  .about-cards {
-    flex-direction: column;
-  }
-
-  .about-card {
-    width: 100%;
+  .about-card,
+  .value-block {
+    width: 100%; /* Растягиваем карточки на всю ширину */
+    padding: 1rem; /* Уменьшаем внутренние отступы */
   }
   .technology-banner,
   .goals-banner {
@@ -814,34 +1012,32 @@ height: calc(100vh - 100px);    overflow-x: hidden; /* Добавьте гори
     margin: 0 auto; /* Центрирование текста */
   }
 
-.value-proposition h3 {
-    font-size: 1.5rem; /* Еще меньше для маленьких экранов */
-    margin-bottom: 0.8rem; /* Сокращенный отступ */
-
+.value-proposition {
+    padding-left: 1rem; /* Отступ слева */
+    padding-right: 1rem; /* Отступ справа */
+    margin: 0 auto; /* Центрирование */
+    box-sizing: border-box; /* Учитываем отступы в ширине */
   }
+
   .value-proposition-blocks {
-    flex-direction: column;
-    gap: 1rem; /* Уменьшите расстояние между карточками */
-    text-align: center;
+    grid-template-columns: 1fr; /* Одна колонка для карточек */
+    gap: 1rem; /* Расстояние между карточками */
   }
 
   .value-block {
-    width: 100%; /* Сделайте карточки на всю ширину */
-    padding: 1rem; /* Уменьшите внутренние отступы */
-  }
-
-  .value-block i {
-    font-size: 1.5rem; /* Уменьшите иконки */
-    margin-bottom: 0.5rem;
+    width: 100%; /* Убедитесь, что карточка растягивается */
+    padding: 1rem;
+    margin: 0; /* Убираем лишние отступы */
+    box-sizing: border-box;
   }
 
   .value-block h4 {
-    font-size: 1.2rem; /* Уменьшите заголовки */
+    font-size: 1rem; /* Уменьшенный размер заголовка */
   }
 
   .value-block p {
-    font-size: 0.9rem; /* Уменьшите текст */
-    line-height: 1.3;
+    font-size: 0.9rem; /* Уменьшенный текст */
+    line-height: 1.4; /* Более плотное межстрочное расстояние */
   }
 
   .hover-card {
@@ -857,6 +1053,43 @@ height: calc(100vh - 100px);    overflow-x: hidden; /* Добавьте гори
   .contact-form {
     width: 100%;
     padding: 1rem;
+  }
+  site-footer {
+    padding: 0.5rem; /* Ещё меньше отступов */
+    font-size: 0.7rem; /* Уменьшаем общий размер текста */
+  }
+
+  .footer-container {
+    gap: 0.5rem; /* Меньше расстояния между секциями */
+  }
+
+  /* Уменьшаем секцию ссылок */
+  .footer-links ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3rem; /* Меньше расстояния между ссылками */
+  }
+
+  .footer-links ul li {
+    margin: 0;
+  }
+
+  .footer-links ul li a {
+    font-size: 0.7rem; /* Ещё меньше текста */
+    padding: 0.2rem 0.4rem; /* Уменьшаем padding */
+  }
+
+  /* Компактный блок контактов */
+  .footer-contact p {
+    margin: 0.2rem 0; /* Минимальные отступы между строками */
+    font-size: 0.7rem; /* Уменьшаем размер шрифта */
+  }
+
+  /* Компактный дисклеймер */
+  .footer-disclaimer {
+    font-size: 0.6rem; /* Ещё меньше шрифт */
+    line-height: 1.3; /* Плотнее строки */
+    margin-top: 0.5rem;
   }
 }
 
