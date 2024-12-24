@@ -1,18 +1,17 @@
 {
   "files": {
-    "main.css": "/algo3portfolio/static/css/main.32ebff56.css",
-    "main.js": "/algo3portfolio/static/js/main.609559ad.js",
+    "main.css": "/algo3portfolio/static/css/main.64840727.css",
+    "main.js": "/algo3portfolio/static/js/main.12268a1b.js",
     "static/js/488.0a3ddffe.chunk.js": "/algo3portfolio/static/js/488.0a3ddffe.chunk.js",
-    "static/media/aboutus.png": "/algo3portfolio/static/media/aboutus.68827b6d7a503169f3dd.png",
     "static/media/goals.png": "/algo3portfolio/static/media/goals.0baf5cc520f41412712e.png",
     "static/media/technology.png": "/algo3portfolio/static/media/technology.0baf5cc520f41412712e.png",
     "index.html": "/algo3portfolio/index.html",
-    "main.32ebff56.css.map": "/algo3portfolio/static/css/main.32ebff56.css.map",
-    "main.609559ad.js.map": "/algo3portfolio/static/js/main.609559ad.js.map",
+    "main.64840727.css.map": "/algo3portfolio/static/css/main.64840727.css.map",
+    "main.12268a1b.js.map": "/algo3portfolio/static/js/main.12268a1b.js.map",
     "488.0a3ddffe.chunk.js.map": "/algo3portfolio/static/js/488.0a3ddffe.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.32ebff56.css",
-    "static/js/main.609559ad.js"
+    "static/css/main.64840727.css",
+    "static/js/main.12268a1b.js"
   ]
 }
