@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import '../styles/Home.css';
 import { calculateMetrics, aggregatePnL } from './TradingResults';
 import Papa from 'papaparse';
@@ -161,7 +161,7 @@ const Home = () => {
       <header className="home-header">
   <div className="header-content">
     {/* Основной текст */}
-    <h1 className="header-title">Algo3 Portfolio</h1>
+    <h1 className="header-title">Algopath Portfolio</h1>
     <p className="header-subtitle">Your trusted partner in algorithmic trading.</p>
 
     {/* Навигация */}
@@ -481,7 +481,7 @@ const Home = () => {
       <button type="submit" className="cta-button">Send Message</button>
     </form>
     <p className="contact-email">
-      Or email us directly at <a href="mailto:invest@algo3.com">invest@algo3.com</a>
+      Or email us directly at <a href="mailto:info@algopathportfolio.com">info@algopathportfolio.com</a>
     </p>
   </div>
 </section>
@@ -507,7 +507,7 @@ const Home = () => {
     {/* Контакты */}
     <div className="footer-contact">
       <h3>Contact Us</h3>
-      <p>Email: support@algo3portfolio.com</p>
+      <p>Email: info@algopathportfolio.com</p>
       <p>Phone: +1-312-543-7471</p>
       <p>Location: 817 Hibbard Road Unit E Wilmette, IL 60091 USA</p>
     </div>
@@ -522,7 +522,7 @@ const Home = () => {
 
   {/* Авторское право */}
   <div className="footer-copyright">
-    <p>&copy; 2024 Algo3 Portfolio. All Rights Reserved.</p>
+    <p>&copy; 2024 AlgoPath Portfolio. All Rights Reserved.</p>
   </div>
 </footer>
 {/* Кнопка "Наверх" */}
