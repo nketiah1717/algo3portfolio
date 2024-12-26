@@ -532,6 +532,35 @@ html, body {
 .trading-results .metrics ul li strong {
   color: #cc5500; /* Темно-оранжевый цвет для выделения */
 }
+.trading-results-container {
+  overflow-y: hidden; /* Убирает вертикальную прокрутку */
+  height: auto; /* Убедитесь, что контейнер адаптируется под содержимое */
+}
+.equity-curve {
+    height: 100%; /* Убедитесь, что контейнер растягивается */
+    width: 100%;
+}
+
+.buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.buttons button {
+    background-color: #cc5500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.buttons button:hover {
+    background-color: #e56700;
+}
+
 
 
 /* Goals Section */
@@ -654,74 +683,79 @@ html, body {
 
 
 /* Partnership Section Styles */
-.partnership-details {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
-  flex-wrap: wrap; /* Stack vertically on smaller screens */
-}
-
-.hover-card {
-  flex: 1;
-  max-width: 500px;
-  background-color: #ffffff;
-  border: 2px solid #f1f1f1; /* Initial light border */
-  border-radius: 10px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+.partnership-section {
+  padding: 4rem 2rem;
+  background-color: #f9f9f9;
   text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.hover-card:hover {
-  transform: translateY(-5px);
-  border-color: #cc5500; /* Highlighted border color on hover */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Add shadow for emphasis */
+.partnership-container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-
-.card-header {
-  margin-bottom: 1rem;
-}
-
-.card-header i.card-icon {
+.partnership-title {
   font-size: 2.5rem;
-  color: #cc5500;
-  margin-bottom: 0.5rem;
-}
-
-.card-header h4 {
-  font-size: 1.5rem;
-  color: #336699;
-  font-weight: bold;
-}
-
-.hover-card p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #333;
-  margin-bottom: 1rem;
-}
-
-.hover-card ul {
-  list-style: none;
-  padding: 0;
+  color: #e56700;
   margin-bottom: 1.5rem;
 }
 
-.hover-card ul li {
-  font-size: 1rem;
+.partnership-description {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
   color: #555;
-  margin-bottom: 0.8rem;
+  line-height: 1.6;
 }
 
-/* Button Styles */
+.partnership-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.partnership-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 300px;
+  text-align: left;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.partnership-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.partnership-card h3 {
+  font-size: 1.5rem;
+  color: #336699;
+  margin-bottom: 1rem;
+}
+
+.partnership-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.partnership-card ul li {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
 .cta-button {
   display: inline-block;
+  margin-top: 1rem;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
-  color: #ffffff;
+  color: #fff;
   background-color: #cc5500;
   border: none;
   border-radius: 4px;
@@ -733,6 +767,7 @@ html, body {
   background-color: #e56700;
   transform: translateY(-2px);
 }
+
 /* Contact Section */
 .contact-section {
   padding: 4rem 2rem;
@@ -982,17 +1017,39 @@ html, body {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 .equity-curve {
-    position: relative;
-height: calc(100vh - 100px);    overflow-x: hidden; /* Добавьте горизонтальную прокрутку */
-  }
+        height: 300px; /* Устанавливаем минимальную высоту */
+    }
+
+.equity-buttons {
+  display: flex;
+  justify-content: center; /* Центрируем кнопки */
+  margin-top: 5px; /* Уменьшаем верхний отступ */
+  gap: 5px; /* Уменьшаем расстояние между кнопками */
+}
+
 
   .equity-curve > div {
     width: 100%; /* График растягивается на всю ширину */
   }
+.equity-container {
+  padding: 0; /* Убираем внутренние отступы */
+  margin: 0; /* Убираем внешние отступы */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрируем график и кнопки */
+  gap: 20px; /* Расстояние между графиком и кнопками */
+}
+.buttons button {
+  z-index: 2;
+  position: relative;
+}
+
 
   .trading-results-container {
-    padding: 1rem; /* Уменьшите отступы */
-  }
+  overflow-y: hidden; /* Убирает вертикальную прокрутку */
+  height: auto; /* Убедитесь, что контейнер адаптируется под содержимое */
+}
+
 
   .goals-banner {
     padding: 4rem 1rem; /* Уменьшенные отступы */

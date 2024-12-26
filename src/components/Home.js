@@ -37,6 +37,7 @@ const Home = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+
   useEffect(() => {
     const observerOptions = {
       threshold: 0.2, // Процент видимой области секции
@@ -97,37 +98,49 @@ const Home = () => {
       }
     };
 
-    fetchMetrics();
-  }, []);
+        fetchMetrics();
+    }, []);
 
-  const getChart = () => {
-    const chartHeight = window.innerWidth < 768 ? 300 : 600;
+    // Update chart on resize
+    useEffect(() => {
+        const handleResize = () => {
+            window.dispatchEvent(new Event('resize'));
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
-    const chartData = {
-      labels: dates.slice(0, data[mode.toLowerCase()].length), // Adjust labels to match data length
-      datasets: [
-        {
-        label: mode,
-        data: data[mode.toLowerCase()],
-        backgroundColor:
-          mode === 'Equity'
-            ? 'transparent' // No background color for the line chart
-            : data[mode.toLowerCase()].map((value) => (value >= 0 ? '#336699' : '#cc5500')), // Dynamic bar colors
-        borderColor: mode === 'Equity' ? '#336699 ' : undefined, // Line color for Equity
-        borderWidth: mode === 'Equity' ? 2 : 0, // Line width for Equity, no borders for bars
-        fill: mode === 'Equity',
-        pointRadius: mode === 'Equity' ? 0 : 3, // Remove points for Equity
-      },
-      ],
-    };
+ const getChart = () => {
+  const chartHeight = window.innerWidth < 768 ? 250 : 500; // Высота графика
 
-    const options = {
+  const chartData = {
+    labels: dates.slice(0, data[mode.toLowerCase()].length), // Метки по оси X
+    datasets: [
+            {
+                label: mode,
+                data: data[mode.toLowerCase()],
+                backgroundColor:
+                    mode === 'Equity' ? 'transparent' : data[mode.toLowerCase()].map((value) =>
+                        value < 0 ? '#cc5500' : '#336699' // Красный для отрицательных, синий для положительных
+                    ),
+                borderColor: mode === 'Equity' ? '#336699' : undefined, // Синий цвет линии для эквити
+                borderWidth: mode === 'Equity' ? 2 : 0, // Линия для эквити
+                pointRadius: mode === 'Equity' ? 0 : undefined, // Убираем точки для эквити
+                tension: mode === 'Equity' ? 0.4 : undefined, // Гладкость линии для эквити
+            },
+    ],
+  };
+
+  const options = {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
       x: {
         ticks: {
-          maxTicksLimit: window.innerWidth < 768 ? 3 : 10, // Меньше меток на мобильных устройствах
+          maxTicksLimit: window.innerWidth < 768 ? 3 : 10,
+          font: {
+            size: window.innerWidth < 768 ? 10 : 12, // Размер шрифта оси X
+          },
         },
         grid: {
           display: false,
@@ -135,8 +148,11 @@ const Home = () => {
       },
       y: {
         ticks: {
-          callback: (value) => `${(value * 100).toFixed(2)}%`, // Процентное отображение
-          maxTicksLimit: 5, // Ограничение количества меток
+          callback: (value) => `${(value * 100).toFixed(2)}%`,
+          maxTicksLimit: 5,
+          font: {
+            size: window.innerWidth < 768 ? 10 : 12, // Размер шрифта оси Y
+          },
         },
         grid: {
           display: false,
@@ -149,12 +165,27 @@ const Home = () => {
       },
     },
   };
-    return mode === 'Daily' || mode === 'Weekly' || mode === 'Monthly' ? (
-      <Bar data={chartData} options={options} />
-    ) : (
-      <Line data={chartData} options={options} />
-    );
-  };
+
+        const chartContainerStyle = {
+    position: 'relative',
+    height: window.innerWidth < 768 ? '300px' : 'calc(100vh - 200px)', // Меньшая высота на мобильных
+    width: '100%',
+    margin: '20px auto',
+};
+
+
+        return (
+            <div style={chartContainerStyle}>
+                {mode === 'Daily' || mode === 'Weekly' || mode === 'Monthly' ? (
+                    <Bar data={chartData} options={options} />
+                ) : (
+                    <Line data={chartData} options={options} />
+                )}
+            </div>
+        );
+    };
+
+
 
   return (
     <div className="home">
@@ -381,7 +412,7 @@ const Home = () => {
 
 
       {/* Goals and Opportunity Section */}
-<section id="goals-and-opportunity" section className="goals animate-section">
+<section id="goals-and-opportunity" className="goals animate-section">
   <div className="banner-style">
     <h2>Goals and Opportunity</h2>
     <p>
@@ -390,74 +421,65 @@ const Home = () => {
   </div>
 
   <div className="value-proposition">
-  <h3>Our Value Proposition</h3>
-  <div className="value-proposition-blocks">
-    <div className="value-block">
-      <i className="fas fa-chart-line"></i>
-      <h4>Proven Track Record</h4>
-      <p>Consistent success in managing risk and generating returns.</p>
-    </div>
-    <div className="value-block">
-      <i className="fas fa-handshake"></i>
-      <h4>Partnerships with Leading Chicago-Based Proprietary Trading Firms</h4>
-      <p>Strong ties to top firms, enhancing strategy and market access.</p>
-    </div>
-    <div className="value-block">
-      <i className="fas fa-percent"></i>
-      <h4>Exchange Membership with Lowest Commissions</h4>
-      <p>Competitive rates that reduce trading costs.</p>
-    </div>
-    <div className="value-block">
-      <i className="fas fa-gavel"></i>
-      <h4>Robust Operational and Legal Structures</h4>
-      <p>Well-established frameworks for smooth business operations.</p>
+    <h3>Our Value Proposition</h3>
+    <div className="value-proposition-blocks">
+      <div className="value-block">
+        <i className="fas fa-chart-line"></i>
+        <h4>Proven Track Record</h4>
+        <p>Consistent success in managing risk and generating returns.</p>
+      </div>
+      <div className="value-block">
+        <i className="fas fa-handshake"></i>
+        <h4>Partnerships with Leading Chicago-Based Proprietary Trading Firms</h4>
+        <p>Strong ties to top firms, enhancing strategy and market access.</p>
+      </div>
+      <div className="value-block">
+        <i className="fas fa-percent"></i>
+        <h4>Exchange Membership with Lowest Commissions</h4>
+        <p>Competitive rates that reduce trading costs.</p>
+      </div>
+      <div className="value-block">
+        <i className="fas fa-gavel"></i>
+        <h4>Robust Operational and Legal Structures</h4>
+        <p>Well-established frameworks for smooth business operations.</p>
+      </div>
     </div>
   </div>
-</div>
 
 
-  <div className="section-divider">
-  <span>Partnership</span>
-</div>
+  {/* Partnership Section */}
+  <section id="partnership" className="partnership-section">
+    <div className="partnership-container">
+      <h2 className="partnership-title">Join AlgoPath Portfolio</h2>
+      <p className="partnership-description">
+        We are seeking a strategic partnership with either an individual investor or a larger hedge fund to operate and manage our AlgoPath Portfolio – a highly refined algorithmic trading system designed to generate consistent returns with minimized risk.
+      </p>
 
-
-  <div className="partnership-section">
-  <div className="partnership-details">
-    {/* Capital Partnership */}
-    <div className="hover-card">
-      <div className="card-header">
-        <i className="fas fa-dollar-sign card-icon"></i>
-        <h4>Capital Partnership</h4>
+      <div className="partnership-details">
+        <div className="partnership-card">
+          <h3>Capital Requirement</h3>
+          <p>
+            <strong>$5–$10 million</strong> with a minimum of <strong>$1 million</strong> allocated to cover potential losses during the first year.
+          </p>
+        </div>
+        <div className="partnership-card">
+          <h3>Why Partner with Us?</h3>
+          <ul>
+            <li>Proven algorithmic trading expertise with consistent performance.</li>
+            <li>Access to proprietary trading strategies and technology.</li>
+            <li>Exclusive right of first refusal to capitalize future portfolios.</li>
+          </ul>
+        </div>
+        <div className="partnership-card">
+          <h3>Ready to Partner?</h3>
+          <p>Join us to redefine the future of algorithmic trading.</p>
+          <button className="cta-button">Start Partnership</button>
+        </div>
       </div>
-
-      <ul>
-        <li>Retail broker trading.</li>
-        <li>Success fee policy.</li>
-        <li>Profits are distributed quarterly.</li>
-        <li>No operational costs.</li>
-      </ul>
-      <button className="cta-button">$100,000 Minimum Investment</button>
     </div>
-
-    {/* Strategic Partnership */}
-    <div className="hover-card">
-      <div className="card-header">
-        <i className="fas fa-handshake card-icon"></i>
-        <h4>Strategic Partnership</h4>
-      </div>
-
-      <ul>
-        <li>Corporate infrastructure for algorithmic trading.</li>
-        <li>Stocks and option strategies.</li>
-        <li>Lowest trading commissions.</li>
-        <li>Operational and legal structures.</li>
-      </ul>
-      <button className="cta-button">$1 Million Minimum Investment</button>
-    </div>
-  </div>
-</div>
-
+  </section>
 </section>
+
 {/* Contact and Feedback Section */}
 <section id="contact" className="contact-section">
   <div className="contact-container">
