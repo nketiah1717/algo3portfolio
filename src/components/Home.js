@@ -448,7 +448,7 @@ const Home = () => {
 
 
   {/* Partnership Section */}
-  <section id="partnership" className="partnership-section">
+  <section id="contact" className="partnership-section">
     <div className="partnership-container">
       <h2 className="partnership-title">Join AlgoPath Portfolio</h2>
       <p className="partnership-description">
@@ -473,39 +473,11 @@ const Home = () => {
         <div className="partnership-card">
           <h3>Ready to Partner?</h3>
           <p>Join us to redefine the future of algorithmic trading.</p>
-          <button className="cta-button">Start Partnership</button>
+          <button className="cta-button">info@algopathportfolio.com</button>
         </div>
       </div>
     </div>
   </section>
-</section>
-
-{/* Contact and Feedback Section */}
-<section id="contact" className="contact-section">
-  <div className="contact-container">
-    <h2>Want to Learn More?</h2>
-    <p>
-      We're excited to share more about our project and partnership opportunities. Feel free to reach out and let's start a conversation!
-    </p>
-    <form className="contact-form">
-      <div className="form-group">
-        <label htmlFor="name">Your Name</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name" required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="email">Your Email</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="message">Your Message</label>
-        <textarea id="message" name="message" placeholder="Enter your message" rows="4" required></textarea>
-      </div>
-      <button type="submit" className="cta-button">Send Message</button>
-    </form>
-    <p className="contact-email">
-      Or email us directly at <a href="mailto:info@algopathportfolio.com">info@algopathportfolio.com</a>
-    </p>
-  </div>
 </section>
 
 
