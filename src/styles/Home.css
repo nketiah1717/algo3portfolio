@@ -427,10 +427,12 @@ html, body {
 }
 /* Portfolio Composition Grid */
 .portfolio-composition-grid {
-  margin-top: 3rem;
-  text-align: center;
-  padding: 2rem;
+  max-width: 1200px; /* Ограничиваем ширину */
+  margin: 0 auto; /* Центрируем */
+  padding: 1rem; /* Отступы внутри */
+  overflow-x: hidden; /* Убираем горизонтальную прокрутку */
 }
+
 
 /* Remove the composition-central CSS block */
 .composition-central {
@@ -456,19 +458,28 @@ html, body {
 
 
 .composition-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
-  gap: 1rem;
+  display: grid; /* Используем CSS Grid */
+  grid-template-columns: repeat(8, 1fr); /* Устанавливаем 8 равных колонок */
+  gap: 0.5rem; /* Пространство между блоками */
+  width: 100%; /* Заполняем всю ширину */
+  padding: 1rem; /* Отступы внутри контейнера */
+  box-sizing: border-box; /* Учитываем padding */
 }
 
+
+
+
+
 .grid-item {
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
+  background-color: #f4f4f4; /* Светлый фон для блоков */
+  text-align: center; /* Центрируем текст */
+  padding: 0.5rem; /* Внутренний отступ */
+  border-radius: 5px; /* Скруглённые углы */
+  font-size: 0.8rem; /* Уменьшаем размер текста */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Лёгкая тень */
 }
+
+
 
 .grid-item:hover {
   transform: translateY(-3px);
@@ -486,6 +497,22 @@ html, body {
   color: #555;
   margin: 0;
   line-height: 1.5;
+}
+@media (max-width: 1200px) {
+  .composition-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 колонки для устройств средней ширины */
+  }
+}
+
+@media (max-width: 768px) {
+  .composition-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 колонки для мобильных */
+  }
+
+  .grid-item {
+    font-size: 0.7rem; /* Ещё меньше текст */
+    padding: 0.4rem; /* Уменьшаем внутренние отступы */
+  }
 }
 
 

@@ -299,44 +299,43 @@ const Home = () => {
       Our technology platform supports a portfolio of 60 fully systematic quantitative strategies implemented in-house using a C# environment. This includes a robust backtesting engine, execution module, data feeds, and a user-friendly GUI application.
     </p>
   </div>
-  <div className="portfolio-composition-grid">
-    <div className="composition-central">
+  <div class="portfolio-composition-grid">
+  <div class="composition-grid">
+    <div class="grid-item">
+      <h4>Number of Models</h4>
+      <p>60</p>
     </div>
-    <div className="composition-grid">
-      <div className="grid-item">
-        <h4>Number of Models</h4>
-        <p>60</p>
-      </div>
-      <div className="grid-item">
-        <h4>Strategy Types</h4>
-        <p>Momentum, Mean Reversion, 1-leg/2-leg ARB</p>
-      </div>
-      <div className="grid-item">
-        <h4>Latency</h4>
-        <p>100 milliseconds (latency insensitive)</p>
-      </div>
-      <div className="grid-item">
-        <h4>Frequency</h4>
-        <p>MFT/LFT</p>
-      </div>
-      <div className="grid-item">
-        <h4>Data Utilization</h4>
-        <p>1-minute, 15-minute timeframes, and tick data</p>
-      </div>
-      <div className="grid-item">
-        <h4>Portfolio Management</h4>
-        <p>Strategies are managed dynamically with equal weight distribution</p>
-      </div>
-      <div className="grid-item">
-        <h4>Backtesting</h4>
-        <p>Data spanning 5 to 7 years ensures rigorous strategy validation</p>
-      </div>
-      <div className="grid-item">
-        <h4>Sustainability</h4>
-        <p>Each model sustains transaction costs of 1 tick plus 5 ticks of slippage per trade</p>
-      </div>
+    <div class="grid-item">
+      <h4>Strategy Types</h4>
+      <p>Momentum, Mean Reversion, 1-leg/2-leg ARB</p>
+    </div>
+    <div class="grid-item">
+      <h4>Latency</h4>
+      <p>100 milliseconds (latency insensitive)</p>
+    </div>
+    <div class="grid-item">
+      <h4>Frequency</h4>
+      <p>MFT/LFT</p>
+    </div>
+    <div class="grid-item">
+      <h4>Data Utilization</h4>
+      <p>1-minute, 15-minute timeframes, and tick data</p>
+    </div>
+    <div class="grid-item">
+      <h4>Portfolio Management</h4>
+      <p>Strategies are managed dynamically with equal weight distribution</p>
+    </div>
+    <div class="grid-item">
+      <h4>Backtesting</h4>
+      <p>Data spanning 5 to 7 years ensures rigorous strategy validation</p>
+    </div>
+    <div class="grid-item">
+      <h4>Sustainability</h4>
+      <p>Each model sustains transaction costs of 1 tick plus 5 ticks of slippage per trade</p>
     </div>
   </div>
+</div>
+
 </section>
 
 
