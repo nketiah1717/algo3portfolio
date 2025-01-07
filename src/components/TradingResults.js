@@ -44,6 +44,37 @@ export const aggregatePnL = (data, interval) => {
   return groupedPnL;
 };
 
+export const aggregatePnLByMonth = (returns, dates) => {
+  const monthlyPnL = [];
+  const monthlyLabels = [];
+  let currentMonth = new Date(dates[0]).getMonth();
+  let currentYear = new Date(dates[0]).getFullYear();
+  let monthlySum = 0;
+
+  for (let i = 0; i < returns.length; i++) {
+    const date = new Date(dates[i]);
+    if (date.getMonth() !== currentMonth || date.getFullYear() !== currentYear) {
+      // Push the sum and label for the previous month
+      monthlyPnL.push(monthlySum);
+      monthlyLabels.push(`${currentMonth + 1}/1/${currentYear}`);
+      // Update month and year
+      currentMonth = date.getMonth();
+      currentYear = date.getFullYear();
+      monthlySum = 0; // Reset sum for new month
+    }
+    monthlySum += returns[i];
+  }
+
+  // Push the final month's PnL and label
+  monthlyPnL.push(monthlySum);
+  monthlyLabels.push(dates[dates.length - 1]); // Ensure the last date is included
+
+  return { monthlyPnL, monthlyLabels };
+};
+
+
+
+
 const TradingResults = () => {
   const [metrics, setMetrics] = useState({});
 

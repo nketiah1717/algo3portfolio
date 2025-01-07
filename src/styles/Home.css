@@ -1044,15 +1044,19 @@ html, body {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 .equity-curve {
-        height: 300px; /* Устанавливаем минимальную высоту */
-    }
+    height: 300px; /* Ensure minimum height on mobile */
+    width: 95%; /* Prevent overflow */
+    margin: 0 auto; /* Center on the screen */
+  }
 
-.equity-buttons {
-  display: flex;
-  justify-content: center; /* Центрируем кнопки */
-  margin-top: 5px; /* Уменьшаем верхний отступ */
-  gap: 5px; /* Уменьшаем расстояние между кнопками */
-}
+  .buttons {
+    gap: 5px; /* Reduce spacing for buttons */
+  }
+
+  .buttons button {
+    padding: 8px; /* Adjust button size for smaller screens */
+    font-size: 0.8rem;
+  }
 
 
   .equity-curve > div {
@@ -1066,10 +1070,7 @@ html, body {
   align-items: center; /* Центрируем график и кнопки */
   gap: 20px; /* Расстояние между графиком и кнопками */
 }
-.buttons button {
-  z-index: 2;
-  position: relative;
-}
+
 
 
   .trading-results-container {

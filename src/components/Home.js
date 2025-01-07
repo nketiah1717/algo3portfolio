@@ -1,6 +1,6 @@
 ﻿import React, { useEffect, useState } from 'react';
 import '../styles/Home.css';
-import { calculateMetrics, aggregatePnL } from './TradingResults';
+import { calculateMetrics, aggregatePnL, aggregatePnLByMonth } from './TradingResults';
 import Papa from 'papaparse';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2';
@@ -9,10 +9,12 @@ import { Line, Bar } from 'react-chartjs-2';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend);
 
 const Home = () => {
-  const [mode, setMode] = useState('Equity'); // Mode state
-  const [data, setData] = useState({ equity: [], daily: [], weekly: [], monthly: [] });
+const [mode, setMode] = useState('Equity'); // Default to 'Equity'
+const [data, setData] = useState({ equity: [], daily: [], weekly: [], monthly: [], cashEquity: [] });
   const [metrics, setMetrics] = useState({});
   const [dates, setDates] = useState([]);
+  const [lastUpdate, setLastUpdate] = useState('');
+
   const [showScroll, setShowScroll] = useState(false); // State for scroll-to-top button
 
   const chartHeight = `calc(200vh - 500px)`;
@@ -37,6 +39,16 @@ const Home = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+   useEffect(() => {
+  const handleResize = () => {
+    console.log('Resize event triggered');
+    // Update state or perform other actions, if necessary
+  };
+
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
 
   useEffect(() => {
     const observerOptions = {
@@ -58,48 +70,84 @@ const Home = () => {
     const sections = document.querySelectorAll('.animate-section');
     sections.forEach((section) => observer.observe(section));
 
-    const fetchMetrics = async () => {
-      try {
-        const response = await fetch(`${process.env.PUBLIC_URL}/assets/files/results.csv`);
-        const reader = response.body.getReader();
-        const result = await reader.read();
-        const decoder = new TextDecoder('utf-8');
-        const csv = decoder.decode(result.value);
 
-        Papa.parse(csv, {
+
+    const fetchMetrics = async () => {
+  try {
+    const [resultsResponse, cashResultsResponse] = await Promise.all([
+      fetch(`${process.env.PUBLIC_URL}/assets/files/results.csv`),
+      fetch(`${process.env.PUBLIC_URL}/assets/files/cashresults.csv`),
+    ]);
+
+    const [resultsText, cashResultsText] = await Promise.all([
+      resultsResponse.text(),
+      cashResultsResponse.text(),
+    ]);
+
+    const parseCSV = (csvText) =>
+      new Promise((resolve) => {
+        Papa.parse(csvText, {
           header: true,
           skipEmptyLines: true,
-          complete: (parsedData) => {
-            const returns = parsedData.data.map((row) => {
-              if (row['Daily return'] && row['Daily return'].trim()) {
-                return parseFloat(row['Daily return'].replace('%', '')) / 100;
-              }
-              return 0;
-            });
-
-            const datesFromCSV = parsedData.data.map((row) => row['Date'] || 'Unknown Date');
-            const cumulativeReturns = returns.reduce((acc, curr) => {
-              acc.push((acc[acc.length - 1] || 0) + curr);
-              return acc;
-            }, []);
-
-            setData({
-              equity: cumulativeReturns,
-              daily: returns,
-              weekly: aggregatePnL(returns, 5),
-              monthly: aggregatePnL(returns, 20),
-            });
-            setMetrics(calculateMetrics(returns));
-            setDates(datesFromCSV);
-          },
+          complete: (parsedData) => resolve(parsedData.data),
         });
-      } catch (error) {
-        console.error('Error fetching or processing metrics:', error);
-      }
-    };
+      });
 
-        fetchMetrics();
-    }, []);
+    const [resultsData, cashResultsData] = await Promise.all([
+      parseCSV(resultsText),
+      parseCSV(cashResultsText),
+    ]);
+
+    const processReturns = (data, isCash = false) => {
+  const returns = data.map((row) =>
+    row['Daily return'] ? parseFloat(row['Daily return']) / 100 : 0
+  );
+  const cumulativeReturns = returns.reduce((acc, curr) => {
+    acc.push((acc[acc.length - 1] || 0) + curr);
+    return acc;
+  }, []);
+  return isCash
+    ? { returns, cumulativeReturns: cumulativeReturns.map((val) => val * 100) } // Adjust scaling
+    : { returns, cumulativeReturns };
+};
+
+
+    const { returns: equityReturns, cumulativeReturns: equityCumulative } =
+      processReturns(resultsData);
+    const { returns: cashReturns, cumulativeReturns: cashCumulative } =
+      processReturns(cashResultsData, true);
+
+    const validDates = resultsData.map((row) => row['Date']).filter((date) => !isNaN(new Date(date).getTime()));
+
+      setData({
+        equity: equityCumulative,
+        daily: equityReturns,
+        weekly: aggregatePnL(equityReturns, 5),
+        monthly: aggregatePnLByMonth(equityReturns, validDates).monthlyPnL,
+        cashEquity: cashCumulative,
+      });
+
+      setDates({
+        equity: validDates,
+        daily: validDates,
+        weekly: validDates.filter((_, index) => index % 5 === 0),
+        monthly: aggregatePnLByMonth(equityReturns, validDates).monthlyLabels,
+        'equity cash': validDates,
+      });
+
+      setMetrics(calculateMetrics(equityReturns));
+
+      // Store the last date
+      const lastUpdate = validDates[validDates.length - 1];
+      setLastUpdate(lastUpdate);
+    } catch (error) {
+      console.error('Error fetching or processing metrics:', error);
+    }
+  };
+
+
+  fetchMetrics();
+}, []);
 
     // Update chart on resize
     useEffect(() => {
@@ -111,79 +159,139 @@ const Home = () => {
     }, []);
 
  const getChart = () => {
-  const chartHeight = window.innerWidth < 768 ? 250 : 500; // Высота графика
+  const keyMapping = {
+    'equity cash': 'cashEquity',
+    equity: 'equity',
+    daily: 'daily',
+    weekly: 'weekly',
+    monthly: 'monthly',
+  };
+
+  const key = keyMapping[mode.toLowerCase()];
+  if (!data[key] || !dates[mode.toLowerCase()]) {
+    console.error(`No data found for mode: ${mode}`);
+    return null;
+  }
 
   const chartData = {
-    labels: dates.slice(0, data[mode.toLowerCase()].length), // Метки по оси X
+    labels: dates[mode.toLowerCase()], // Use specific labels for the mode
     datasets: [
-            {
-                label: mode,
-                data: data[mode.toLowerCase()],
-                backgroundColor:
-                    mode === 'Equity' ? 'transparent' : data[mode.toLowerCase()].map((value) =>
-                        value < 0 ? '#cc5500' : '#336699' // Красный для отрицательных, синий для положительных
-                    ),
-                borderColor: mode === 'Equity' ? '#336699' : undefined, // Синий цвет линии для эквити
-                borderWidth: mode === 'Equity' ? 2 : 0, // Линия для эквити
-                pointRadius: mode === 'Equity' ? 0 : undefined, // Убираем точки для эквити
-                tension: mode === 'Equity' ? 0.4 : undefined, // Гладкость линии для эквити
-            },
+      {
+        label: mode,
+        data: data[key],
+        backgroundColor: mode === 'Daily' || mode === 'Weekly' || mode === 'Monthly'
+          ? data[key].map((value) => (value >= 0 ? '#336699' : '#cc5500')) // Fill color for bars
+          : 'transparent', // Transparent for lines
+        borderColor: mode === 'Equity Cash' ? '#cc5500' : '#336699', // Line color
+        borderWidth: mode === 'Daily' || mode === 'Weekly' || mode === 'Monthly' ? 0 : 2, // Remove borders for bars
+        pointRadius: 0, // No points on lines
+        tension: mode === 'Equity' || mode === 'Equity Cash' ? 0.4 : 0, // Smooth line for equity
+      },
     ],
   };
 
   const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        ticks: {
-          maxTicksLimit: window.innerWidth < 768 ? 3 : 10,
-          font: {
-            size: window.innerWidth < 768 ? 10 : 12, // Размер шрифта оси X
-          },
-        },
-        grid: {
-          display: false,
-        },
+  responsive: true,
+  maintainAspectRatio: false,
+  scales: {
+    x: {
+      ticks: {
+        maxTicksLimit: window.innerWidth < 768 ? 3 : 10,
+        padding: 15,
       },
-      y: {
-        ticks: {
-          callback: (value) => `${(value * 100).toFixed(2)}%`,
-          maxTicksLimit: 5,
-          font: {
-            size: window.innerWidth < 768 ? 10 : 12, // Размер шрифта оси Y
-          },
-        },
-        grid: {
-          display: false,
-        },
-      },
+      grid: { display: false },
     },
-    plugins: {
-      legend: {
-        display: false,
+    y: {
+      ticks: {
+        callback: (value) =>
+          mode === 'Equity Cash'
+            ? `$${value.toLocaleString(undefined, { minimumFractionDigits: 0 })}`
+            : `${(value * 100).toFixed(2)}%`,
       },
+      grid: { display: false },
     },
-  };
+  },
+  plugins: {
+    legend: { display: false },
+    customLabel: {
+      position: { x: 10, y: 10 },
+      text: `Last update: ${lastUpdate}`,
+    },
+  },
+};
 
-        const chartContainerStyle = {
-    position: 'relative',
-    height: window.innerWidth < 768 ? '300px' : 'calc(100vh - 200px)', // Меньшая высота на мобильных
-    width: '100%',
-    margin: '20px auto',
+const customLabelPlugin = {
+  id: 'customLabel',
+  beforeDraw: (chart, args, options) => {
+    const { ctx, chartArea } = chart;
+    const text = options.text;
+
+    // Adjust size for mobile screens
+    const isMobile = window.innerWidth < 768;
+    const fontSize = isMobile ? 10 : 14; // Smaller font size for mobile
+    const padding = isMobile ? 5 : 10; // Smaller padding for mobile
+    const x = chartArea.left + padding; // Adjust position based on padding
+    const y = chartArea.top + padding + fontSize;
+
+    // Set font and measure text
+    ctx.save();
+    ctx.font = `${fontSize}px Arial`;
+    const textWidth = ctx.measureText(text).width;
+
+    // Draw background box
+    ctx.fillStyle = '#f0f0f0'; // Light gray background
+    ctx.strokeStyle = '#336699'; // Blue border
+    ctx.lineWidth = 1;
+
+    // Rectangle dimensions
+    const boxWidth = textWidth + padding * 2;
+    const boxHeight = fontSize + padding * 2;
+
+    ctx.fillRect(x, y - boxHeight, boxWidth, boxHeight); // Draw filled rectangle
+    ctx.strokeRect(x, y - boxHeight, boxWidth, boxHeight); // Draw border
+
+    // Draw text
+    ctx.fillStyle = '#000'; // Black text
+    ctx.fillText(text, x + padding, y - padding); // Draw text inside the box
+
+    ctx.restore();
+  },
 };
 
 
-        return (
-            <div style={chartContainerStyle}>
-                {mode === 'Daily' || mode === 'Weekly' || mode === 'Monthly' ? (
-                    <Bar data={chartData} options={options} />
-                ) : (
-                    <Line data={chartData} options={options} />
-                )}
-            </div>
-        );
-    };
+
+
+
+
+  const chartContainerStyle = {
+  position: 'relative',
+  height: window.innerWidth < 768 ? '300px' : 'calc(100vh - 150px)', // Adjust for mobile
+  width: '100%',
+  maxWidth: '95vw', // Prevent horizontal overflow
+  margin: '10px auto', // Center the chart
+};
+
+
+
+  return (
+  <div style={chartContainerStyle}>
+    {mode === 'Daily' || mode === 'Weekly' || mode === 'Monthly' ? (
+      <Bar
+        data={chartData}
+        options={options}
+        plugins={[customLabelPlugin]} // Include custom label plugin
+      />
+    ) : (
+      <Line
+        data={chartData}
+        options={options}
+        plugins={[customLabelPlugin]} // Include custom label plugin
+      />
+    )}
+  </div>
+);
+
+};
 
 
 
@@ -387,7 +495,7 @@ const Home = () => {
 
   </div>
   <div className="buttons" style={{ textAlign: 'center', marginTop: '10px' }}>
-    {['Equity', 'Daily', 'Weekly', 'Monthly'].map((m) => (
+    {['Equity','Equity Cash', 'Daily', 'Weekly', 'Monthly'].map((m) => (
       <button
         key={m}
         onClick={() => setMode(m)}
