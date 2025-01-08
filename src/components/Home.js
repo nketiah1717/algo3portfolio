@@ -559,14 +559,17 @@ const customLabelPlugin = {
     <div className="partnership-container">
       <h2 className="partnership-title">Join AlgoPath Portfolio</h2>
       <p className="partnership-description">
-        We are seeking a strategic partnership with either an individual investor or a larger hedge fund to operate and manage our AlgoPath Portfolio – a highly refined algorithmic trading system designed to generate consistent returns with minimized risk.
+We are seeking a strategic partnership with a Hedge Fund, Family Office, or HNW investor who shares a
+ similar long-term vision and possesses a deep understanding of capital markets. A mutual alignment on risk appetite
+ and a shared approach to scaling effectively are crucial to fostering the right synergy and successful collaboration.
+
       </p>
 
       <div className="partnership-details">
         <div className="partnership-card">
           <h3>Capital Requirement</h3>
           <p>
-            <strong>$5–$10 million</strong> with a minimum of <strong>$1 million</strong> allocated to cover potential losses during the first year.
+            <strong>$10 million</strong> with an expected drawdown  not exceeding <strong>20%</strong> in the first year.
           </p>
         </div>
         <div className="partnership-card">
@@ -579,7 +582,7 @@ const customLabelPlugin = {
         </div>
         <div className="partnership-card">
           <h3>Ready to Partner?</h3>
-          <p>Join us to redefine the future of algorithmic trading.</p>
+          <p>Join us to redefine the future of algorithmic trading. For inquiries, please contact us at</p>
           <button className="cta-button">info@algopathportfolio.com</button>
         </div>
       </div>
