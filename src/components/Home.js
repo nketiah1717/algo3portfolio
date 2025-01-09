@@ -569,7 +569,7 @@ We are seeking a strategic partnership with a Hedge Fund, Family Office, or HNW 
         <div className="partnership-card">
           <h3>Capital Requirement</h3>
           <p>
-            <strong>$10 million</strong> with an expected drawdown  not exceeding <strong>20%</strong> in the first year.
+            <strong>$10 million</strong>  with a targeted drawdown of at least <strong>30%</strong> in the first year to achieve optimal performance.
           </p>
         </div>
         <div className="partnership-card">
