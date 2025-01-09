@@ -537,18 +537,18 @@ const customLabelPlugin = {
       </div>
       <div className="value-block">
         <i className="fas fa-handshake"></i>
-        <h4>Partnerships with Leading Chicago-Based Proprietary Trading Firms</h4>
-        <p>Strong ties to top firms, enhancing strategy and market access.</p>
+        <h4>Cutting-Edge Algorithmic Strategies</h4>
+        <p>Proprietary, data-driven algorithms designed to execute in highly liquid products across CME Group exchanges.</p>
       </div>
       <div className="value-block">
         <i className="fas fa-percent"></i>
-        <h4>Exchange Membership with Lowest Commissions</h4>
-        <p>Competitive rates that reduce trading costs.</p>
+        <h4>Scalability</h4>
+        <p>Immediate capability to scale the current portfolio by over 5000% with minimal impact on performance.</p>
       </div>
       <div className="value-block">
         <i className="fas fa-gavel"></i>
-        <h4>Robust Operational and Legal Structures</h4>
-        <p>Well-established frameworks for smooth business operations.</p>
+        <h4>Expanding Market Opportunities</h4>
+        <p>Expand Algo3 Portfolio with new capital and strategies while applying our process to other markets and partnerships.</p>
       </div>
     </div>
   </div>
