@@ -4,6 +4,8 @@ import { calculateMetrics, aggregatePnL, aggregatePnLByMonth } from './TradingRe
 import Papa from 'papaparse';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2';
+import Heatmap from "./Heatmap";
+
 
 // Register necessary Chart.js components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend);
@@ -171,6 +173,23 @@ const [data, setData] = useState({ equity: [], daily: [], weekly: [], monthly: [
   if (!data[key] || !dates[mode.toLowerCase()]) {
     console.error(`No data found for mode: ${mode}`);
     return null;
+  }
+  if (mode === "Monthly") {
+    const formattedData = {};
+    data.monthly.forEach((value, index) => {
+      if (value === undefined || value === null) return; // Пропуск значений без данных
+
+      const date = new Date(dates.monthly[index]);
+      const year = date.getFullYear();
+      const month = date.getMonth();
+
+      if (!formattedData[year]) {
+        formattedData[year] = Array(12).fill(undefined); // Заполняем пустыми значениями
+      }
+      formattedData[year][month] = value;
+    });
+
+    return <Heatmap data={formattedData} />;
   }
 
   const chartData = {
@@ -495,7 +514,7 @@ const customLabelPlugin = {
 
   </div>
   <div className="buttons" style={{ textAlign: 'center', marginTop: '10px' }}>
-    {['Equity','Equity Cash', 'Daily', 'Weekly', 'Monthly'].map((m) => (
+{['Equity', 'Equity Cash', 'Monthly'].map((m) => (
       <button
         key={m}
         onClick={() => setMode(m)}

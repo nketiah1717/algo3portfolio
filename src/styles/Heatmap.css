@@ -1,0 +1,125 @@
+.heatmap-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.heatmap-year {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.heatmap-year-title {
+  text-align: left;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #336699;
+}
+
+.heatmap-months {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr); /* 12 столбцов для десктопов */
+  gap: 5px;
+}
+
+.heatmap-cell {
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9rem;
+  color: #fff;
+  border-radius: 5px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.heatmap-label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.heatmap-value {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .heatmap-container {
+    gap: 10px; /* Уменьшаем расстояние между годами */
+    padding: 5px; /* Уменьшаем общий отступ */
+  }
+
+  .heatmap-year {
+    margin-bottom: 10px; /* Уменьшаем отступ между годами */
+  }
+
+  .heatmap-year-title {
+    font-size: 0.9rem; /* Чуть больше заголовок */
+    text-align: center; /* Центрируем заголовки */
+    margin-bottom: 5px;
+  }
+
+  .heatmap-months {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 столбца для компактности */
+    gap: 3px; /* Минимальные отступы между ячейками */
+  }
+
+  .heatmap-cell {
+    padding: 4px; /* Немного меньше размер ячеек */
+    font-size: 0.7rem; /* Увеличенный текст внутри ячеек */
+    border-radius: 2px; /* Минимальный радиус углов */
+  }
+
+  .heatmap-label {
+    font-size: 0.5rem; /* Увеличенный текст меток */
+    top: 2px;
+    left: 2px;
+  }
+
+  .heatmap-value {
+    font-size: 0.6rem; /* Увеличенный текст значений */
+    margin-top: 2px;
+  }
+}
+
+/* Для экранов меньше 480px */
+@media (max-width: 480px) {
+  .heatmap-container {
+    gap: 8px; /* Ещё меньшее расстояние между годами */
+    padding: 3px;
+  }
+
+  .heatmap-months {
+    grid-template-columns: repeat(3, 1fr); /* 3 столбца для супер-компактности */
+    gap: 2px;
+  }
+
+  .heatmap-cell {
+    padding: 3px; /* Немного уменьшенный размер ячеек */
+    font-size: 0.6rem; /* Увеличенный текст внутри ячеек */
+  }
+
+  .heatmap-label {
+    font-size: 0.4rem; /* Чуть больше текст меток */
+  }
+
+  .heatmap-value {
+    font-size: 0.5rem; /* Увеличенный текст значений */
+    margin-top: 1px;
+  }
+
+  .heatmap-year-title {
+    font-size: 0.8rem; /* Чуть больше шрифт для заголовков */
+    margin-bottom: 5px;
+  }
+}
