@@ -514,7 +514,7 @@ const customLabelPlugin = {
 
   </div>
   <div className="buttons" style={{ textAlign: 'center', marginTop: '10px' }}>
-{['Equity', 'Equity Cash', 'Monthly'].map((m) => (
+{['Equity', 'Equity Cash', 'Daily', 'Weekly', 'Monthly'].map((m) => (
       <button
         key={m}
         onClick={() => setMode(m)}
